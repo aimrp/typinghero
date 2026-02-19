@@ -1,0 +1,66 @@
+{
+  "name": "xingguangdazi",
+  "version": "1.0.0",
+  "description": "星光打字 - 沉浸式中文打字练习",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.xingguangdazi.app",
+    "productName": "打字英雄",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.education",
+      "icon": "logo.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "dmg": {
+      "title": "安装打字英雄",
+      "icon": "logo.png",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!node_modules/**/*",
+      "!package-lock.json"
+    ]
+  },
+  "keywords": [],
+  "author": "Adam",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^40.4.1",
+    "electron-builder": "^26.7.0"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.dmg
+*.exe
+*.zip
+*.blockmap
+builder-debug.yml
+builder-effective-config.yaml
+.idea/
+.vscode/
