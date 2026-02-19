@@ -33,8 +33,9 @@
 ### 方式一：直接下载安装包（推荐）
 
 前往 [Releases](https://github.com/YOUR_USERNAME/typinghero/releases) 页面下载对应系统的安装包：
-*   **Windows**: 下载 `.exe` 文件，双击安装。
-*   **macOS**: 下载 `.dmg` 文件，拖拽安装。
+*   **macOS**: 下载 `.dmg` 文件，拖拽安装（已发布 ✅）。
+*   **Windows**: `.exe` 版本即将发布，敬请期待 ⏳。
+*   **Web 网页版**: 您也可以直接访问项目中的 `keyboard.html` 或在线地址（待部署），体验全平台通用的网页版本 🌐。
 
 ### 方式二：开发者模式运行
 
