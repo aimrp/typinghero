@@ -41,8 +41,8 @@
 
 前往 [Releases](https://github.com/aimrp/typinghero/releases) 页面下载对应系统的安装包：
 *   **macOS**: 下载 `.dmg` 文件，拖拽安装（已发布 ✅）。
-*   **Windows**: `.exe` 版本即将发布，敬请期待 ⏳。
-*   **Web 网页版**: 下载`typinghero-1.0.0-web-version.zip` 文件 🌐。
+*   **Windows**: 下载 `_Portable.exe` 版本，**无需安装，双击直接运行**（已发布 ✅）。
+*   **Web 网页版**: 您也可以直接访问项目中的 `keyboard.html` 或在线地址（待部署），体验全平台通用的网页版本 🌐。
 
 ### 方式二：开发者模式运行
 

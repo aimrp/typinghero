@@ -20,8 +20,11 @@
       "icon": "logo.png"
     },
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "icon": "logo.png"
+    },
+    "portable": {
+      "artifactName": "打字英雄_Portable_1.0.0.exe"
     },
     "nsis": {
       "oneClick": false,
