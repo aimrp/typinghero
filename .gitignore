@@ -9,3 +9,5 @@ builder-debug.yml
 builder-effective-config.yaml
 .idea/
 .vscode/
+debug.log
+*.log

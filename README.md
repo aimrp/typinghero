@@ -72,12 +72,26 @@
 *   `audio_assets/`: 语音包素材。
 *   `audio_bgm/`: 背景音乐素材。
 *   `main.js`: 窗口启动脚本。
+*   `docs/`: 文档优先 (doc-first / vibe coding) 相关规范文档。
+
+### docs/ 目录说明（Vibe Coding 文档栈）
+
+本项目在实践「文档优先」的氛围编程（Vibe Coding）方式，所有重要约定都先写成文档，再让人 / AI 按文档实现代码。当前包含：
+
+*   `docs/PRD.md`：产品需求文档，描述要做什么、给谁用、成功标准是什么。
+*   `docs/APP_FLOW.md`：应用页面与用户流程，用纯中文串起所有界面和交互路径。
+*   `docs/TECH_STACK.md`：技术栈与依赖约定，锁定 Electron 版本、打包配置和外部库。
+*   `docs/FRONTEND_GUIDELINES.md`：前端 UI 与交互规范，约定颜色、布局、动效和文案风格。
+*   `docs/BACKEND_STRUCTURE.md`：当前“无后端”状态说明与未来后端扩展规划占位。
+*   `docs/IMPLEMENTATION_PLAN.md`：实施步骤清单，把项目拆成可执行的小步。
+
+在使用 AI 编程助手（例如 Cursor、Trae 等）时，建议先把 docs/ 下的文档作为上下文，让 AI 按这些约定来写代码，而不是随意猜测架构和风格。
 
 ## 🤝 贡献与反馈
 
 如果您有好的建议，或者发现了 Bug，欢迎提交 Issue。让我们一起为孩子们打造更好的打字练习工具！
 
-## � 语音合成配置 (开发者选项)
+## 语音合成配置 (开发者选项)
 
 如果你想重新生成项目中的语音素材，需要配置 Minimax API：
 
@@ -92,6 +106,6 @@
     python3 scripts/generate_audio.py
     ```
 
-## �📄 许可证
+## 📄 许可证
 
 MIT License
