@@ -2079,9 +2079,11 @@
         totalWpm: 0,
         totalAcc: 0
       }
-    };
+      };
 
-    const els = {
+      let lastCompositionText = "";
+
+      const els = {
       textDisplay: document.getElementById("text-display"),
       sourceTag: document.getElementById("source-tag"),
       input: document.getElementById("input-field"),
@@ -2943,12 +2945,36 @@
     // 监听拼音输入法状态
     els.input.addEventListener("compositionstart", () => {
       state.isComposing = true;
-      // 第一次交互初始化音频上下文
+      lastCompositionText = "";
       AudioEngine.init();
+    });
+
+    els.input.addEventListener("compositionupdate", (e) => {
+      const newText = e.data || "";
+      const oldText = lastCompositionText;
+      if (newText !== oldText) {
+        if (newText.length > oldText.length) {
+          const added = newText.slice(oldText.length);
+          for (let i = 0; i < added.length; i++) {
+            const ch = added[i].toLowerCase();
+            if (ch === " ") {
+              highlightKey(" ");
+            } else if (ch >= "a" && ch <= "z") {
+              highlightKey(ch);
+            }
+            AudioEngine.playClick();
+          }
+        } else if (newText.length < oldText.length) {
+          highlightKey("backspace");
+          AudioEngine.playClick();
+        }
+        lastCompositionText = newText;
+      }
     });
 
     els.input.addEventListener("compositionend", (e) => {
       state.isComposing = false;
+      lastCompositionText = "";
       validateInput(e.target.value);
     });
 
@@ -3066,10 +3092,15 @@
     }
 
     window.addEventListener("keydown", (e) => {
-        // 播放键盘音效
+        if (state.isComposing) return;
         AudioEngine.playClick();
 
-        const k = e.key;
+        let k = e.key;
+        if (k === "Process" && e.code && e.code.startsWith("Key")) {
+            k = e.code.slice(3);
+        } else if (k === "Space") {
+            k = " ";
+        }
         if (k.length === 1) highlightKey(k.toLowerCase());
         else if (k === "Tab") { e.preventDefault(); highlightKey("tab"); }
         else if (k === "CapsLock") highlightKey("capslock");
