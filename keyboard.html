@@ -1023,9 +1023,41 @@
   <!-- Logo 与 Combo 区域 -->
   <div class="header-area">
     <!-- Logo -->
-    <img src="assets/img/logo.png" alt="打字英雄" class="app-logo" width="300">
-    <!-- <div class="app-logo"> ... SVG code ... </div> -->
-    
+    <div class="app-logo">
+      <svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#c33a7a;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff9a9e;stop-opacity:1" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <!-- 键盘底座图形 -->
+        <rect x="20" y="45" width="200" height="25" rx="5" fill="#f0f0f5" stroke="#c33a7a" stroke-width="2"/>
+        <!-- 装饰按键 -->
+        <rect x="30" y="50" width="15" height="15" rx="2" fill="#ffd6f2"/>
+        <rect x="50" y="50" width="15" height="15" rx="2" fill="#ffd6f2"/>
+        <rect x="70" y="50" width="15" height="15" rx="2" fill="#ffd6f2"/>
+        
+        <!-- 文字 -->
+        <text x="120" y="55" font-family="'Microsoft YaHei', sans-serif" font-size="42" font-weight="900" fill="url(#heroGradient)" text-anchor="middle" filter="url(#glow)" style="text-shadow: 2px 2px 0px white;">
+          打字英雄
+        </text>
+        
+        <!-- 闪光星星 -->
+        <path d="M210 20 L213 28 L221 28 L215 34 L217 42 L210 37 L203 42 L205 34 L199 28 L207 28 Z" fill="#ffeb3b" stroke="#fbc02d" stroke-width="1">
+          <animateTransform attributeName="transform" type="rotate" from="0 210 32" to="360 210 32" dur="3s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+
     <!-- 连击特效容器 (移至此处) -->
     <div id="combo-container" class="combo-container">
       <div class="combo-fire"></div>

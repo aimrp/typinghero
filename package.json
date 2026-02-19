@@ -17,11 +17,11 @@
     "mac": {
       "target": "dmg",
       "category": "public.app-category.education",
-      "icon": "logo.png"
+      "icon": "assets/img/logo.png"
     },
     "win": {
       "target": "portable",
-      "icon": "logo.png"
+      "icon": "assets/img/logo.png"
     },
     "portable": {
       "artifactName": "打字英雄_Portable_1.0.0.exe"
@@ -34,7 +34,7 @@
     },
     "dmg": {
       "title": "安装打字英雄",
-      "icon": "logo.png",
+      "icon": "assets/img/logo.png",
       "contents": [
         {
           "x": 130,
