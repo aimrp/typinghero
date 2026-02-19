@@ -77,6 +77,21 @@
 
 如果您有好的建议，或者发现了 Bug，欢迎提交 Issue。让我们一起为孩子们打造更好的打字练习工具！
 
-## 📄 许可证
+## � 语音合成配置 (开发者选项)
+
+如果你想重新生成项目中的语音素材，需要配置 Minimax API：
+
+1.  获取 API Key 和 Group ID ([Minimax 开放平台](https://api.minimax.chat/))。
+2.  设置环境变量：
+    ```bash
+    export MINIMAX_API_KEY="your_api_key"
+    export MINIMAX_GROUP_ID="your_group_id"
+    ```
+3.  运行生成脚本：
+    ```bash
+    python3 scripts/generate_audio.py
+    ```
+
+## �📄 许可证
 
 MIT License

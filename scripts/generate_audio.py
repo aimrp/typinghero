@@ -5,8 +5,15 @@ import time
 
 # --- 配置部分 ---
 # 请填入您的 Minimax API Key 和 Group ID
-API_KEY = "sk-api-VyWcxeKiVF_h1aAm5T0l4xVo86MqWX7YKyISqompxlPJkjKIV9-8QPpjTMn9BJD-KYgg3YJyy_u4pJLehiFJXYORdsgDtbqPBkUBNOxcdDmVS854xy1jTig"
-GROUP_ID = "2011982058271809999"
+# 建议通过环境变量配置，或者创建一个 .env 文件 (不要提交到 Git)
+API_KEY = os.getenv("MINIMAX_API_KEY", "YOUR_API_KEY_HERE")
+GROUP_ID = os.getenv("MINIMAX_GROUP_ID", "YOUR_GROUP_ID_HERE")
+
+# 检查是否配置了 Key
+if API_KEY == "YOUR_API_KEY_HERE" or GROUP_ID == "YOUR_GROUP_ID_HERE":
+    print("⚠️  警告: 请先配置 MINIMAX_API_KEY 和 MINIMAX_GROUP_ID 环境变量，或修改脚本中的默认值。")
+    # 为了演示，不直接退出，但后续请求可能会失败
+
 
 # 语音设置
 VOICE_ID = "female-yujie" # 假设使用御姐音，具体 ID 需参考 Minimax 文档
