@@ -1016,6 +1016,39 @@
         filter: blur(20px);
       }
     }
+
+    .debug-toggle {
+      display: none;
+    }
+
+    .debug-panel {
+      display: none;
+    }
+
+    .debug-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .debug-panel-body {
+      overflow-y: auto;
+      max-height: 220px;
+      white-space: pre;
+    }
+
+    .debug-btn {
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -1274,6 +1307,18 @@
   <div id="toast" class="toast"></div>
   <canvas id="fireworks"></canvas>
   <canvas id="keyboard-fire"></canvas>
+
+  <button id="debug-toggle" class="debug-toggle">事件调试</button>
+  <div id="debug-panel" class="debug-panel">
+    <div class="debug-panel-header">
+      <span>IME 事件日志</span>
+      <div>
+        <button id="debug-copy" class="debug-btn">复制</button>
+        <button id="debug-clear" class="debug-btn">清空</button>
+      </div>
+    </div>
+    <div id="debug-body" class="debug-panel-body"></div>
+  </div>
 
   <div class="victory-overlay" id="victory-overlay">
     <div class="victory-title">恭喜你<br>成为了打字英雄！</div>
@@ -2078,12 +2123,14 @@
         completedCount: 0,
         totalWpm: 0,
         totalAcc: 0
-      }
-      };
+      },
+      debugEventsEnabled: false
+    };
 
-      let lastCompositionText = "";
+    let lastCompositionText = "";
+    let debugLines = [];
 
-      const els = {
+    const els = {
       textDisplay: document.getElementById("text-display"),
       sourceTag: document.getElementById("source-tag"),
       input: document.getElementById("input-field"),
@@ -2112,11 +2159,33 @@
       comboProgressArea: document.getElementById("combo-progress-area"),
       comboBar: document.getElementById("combo-bar"),
       milestone100: document.getElementById("milestone-100"),
-      milestone200: document.getElementById("milestone-200")
+      milestone200: document.getElementById("milestone-200"),
+      debugToggle: document.getElementById("debug-toggle"),
+      debugPanel: document.getElementById("debug-panel"),
+      debugBody: document.getElementById("debug-body"),
+      debugClear: document.getElementById("debug-clear"),
+      debugCopy: document.getElementById("debug-copy")
     };
 
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 40; // 251.32
     const CIRCLE_CIRCUMFERENCE_SMALL = 2 * Math.PI * 32; // 201.06
+
+    function logEvent(name, detail) {
+      if (!state.debugEventsEnabled) return;
+      const now = new Date();
+      const timePart = now.toTimeString().split(" ")[0];
+      const ms = now.getMilliseconds().toString().padStart(3, "0");
+      const line = "[" + timePart + "." + ms + "] " + name + " " + detail;
+      debugLines.push(line);
+      if (typeof console !== "undefined" && console.log) {
+        console.log(line);
+      }
+      if (debugLines.length > 120) debugLines.shift();
+      if (els.debugBody) {
+        els.debugBody.textContent = debugLines.join("\n");
+        els.debugBody.scrollTop = els.debugBody.scrollHeight;
+      }
+    }
 
     // --- 3. 音频引擎 (Simple Audio - audio_test.html 风格) ---
     // 音频文件路径常量
@@ -2942,11 +3011,52 @@
         }
     });
 
-    // 监听拼音输入法状态
-    els.input.addEventListener("compositionstart", () => {
+    if (els.debugToggle && els.debugPanel) {
+      els.debugToggle.addEventListener("click", () => {
+        state.debugEventsEnabled = !state.debugEventsEnabled;
+        els.debugToggle.classList.toggle("active", state.debugEventsEnabled);
+        els.debugPanel.classList.toggle("show", state.debugEventsEnabled);
+      });
+    }
+
+    if (els.debugClear && els.debugBody) {
+      els.debugClear.addEventListener("click", () => {
+        debugLines = [];
+        els.debugBody.textContent = "";
+      });
+    }
+
+    if (els.debugCopy && els.debugBody) {
+      els.debugCopy.addEventListener("click", () => {
+        const text = debugLines.join("\n");
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).catch(() => {
+            const range = document.createRange();
+            range.selectNodeContents(els.debugBody);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+          });
+        } else {
+          const range = document.createRange();
+          range.selectNodeContents(els.debugBody);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      });
+    }
+
+    els.input.addEventListener("beforeinput", (e) => {
+      logEvent("beforeinput", "type=" + (e.inputType || "") + " data=" + (e.data || ""));
+    });
+
+    els.input.addEventListener("compositionstart", (e) => {
       state.isComposing = true;
       lastCompositionText = "";
       AudioEngine.init();
+      logEvent("compositionstart", "data=" + (e && e.data !== undefined ? e.data : ""));
     });
 
     els.input.addEventListener("compositionupdate", (e) => {
@@ -2962,26 +3072,27 @@
             } else if (ch >= "a" && ch <= "z") {
               highlightKey(ch);
             }
-            AudioEngine.playClick();
           }
         } else if (newText.length < oldText.length) {
           highlightKey("backspace");
-          AudioEngine.playClick();
         }
         lastCompositionText = newText;
       }
+      logEvent("compositionupdate", "data=" + newText);
     });
 
     els.input.addEventListener("compositionend", (e) => {
       state.isComposing = false;
       lastCompositionText = "";
       validateInput(e.target.value);
+      logEvent("compositionend", "value=" + e.target.value);
     });
 
     els.input.addEventListener("input", (e) => {
       if (!state.isComposing) {
         validateInput(e.target.value);
       }
+      logEvent("input", "type=" + (e.inputType || "") + " value=" + e.target.value);
     });
     
     // 点击页面任意位置也初始化音频，防止自动播放策略限制
@@ -3091,8 +3202,9 @@
         createKeySparks(rect);
     }
 
-    window.addEventListener("keydown", (e) => {
-        if (state.isComposing) return;
+    const downKeyIds = new Set();
+
+    function handleKeyVisualAndSound(e) {
         AudioEngine.playClick();
 
         let k = e.key;
@@ -3108,7 +3220,24 @@
         else if (k === "Shift") { highlightKey("shift"); highlightKey("shift-right"); }
         else if (k === "Control") { highlightKey("ctrl"); highlightKey("ctrl-right"); }
         else if (k === "Alt") { highlightKey("alt"); highlightKey("alt-right"); }
-    });
+    }
+
+    window.addEventListener("keydown", (e) => {
+        logEvent("keydown", "key=" + e.key + " code=" + e.code + " isComposing=" + state.isComposing);
+        const id = e.code || e.key;
+        downKeyIds.add(id);
+        handleKeyVisualAndSound(e);
+    }, true);
+
+    window.addEventListener("keyup", (e) => {
+        logEvent("keyup", "key=" + e.key + " code=" + e.code + " isComposing=" + state.isComposing);
+        const id = e.code || e.key;
+        if (!downKeyIds.has(id)) {
+            handleKeyVisualAndSound(e);
+        } else {
+            downKeyIds.delete(id);
+        }
+    }, true);
 
     // --- 6. 烟花与火星特效 ---
     const canvas = els.canvas;
