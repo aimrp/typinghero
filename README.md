@@ -41,9 +41,9 @@
 
 请直接前往 GitHub 的 [Releases 页面](https://github.com/aimrp/typinghero/releases) 下载最新版本，无需任何配置，解压/双击即玩！
 
-*   **Windows**: 下载 `打字英雄_Portable_1.0.0.exe` (支持 Win10/Win11, x64架构)
+*   **Windows**: 下载 `typinghero-1.0.0.exe` (支持 Win10/Win11, x64架构)
     *   *特点：绿色免安装，双击直接运行。*
-*   **macOS**: 下载 `打字英雄-1.0.0-arm64.dmg` (支持 M1/M2/M3 芯片)
+*   **macOS**: 下载 `typinghero-1.0.0.dmg` (支持 M1/M2/M3 芯片)
     *   *特点：拖拽安装，原生体验。*
 *   **Web / 其他平台**: 直接下载 `Source code (zip)` 源码包
     *   *特点：解压后双击 `keyboard.html`，在浏览器中直接体验，全平台通用。*
