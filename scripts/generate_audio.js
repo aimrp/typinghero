@@ -6,7 +6,7 @@ const API_KEY = 'sk-api-8cOnCUI2O-PFoPi3LzwNU5USJaz4OI819TF2_vTlhiDJnxwKsKmL1AnS
 // 尝试一个假的 GroupID，看看错误信息是否改变
 const FAKE_GROUP_ID = '1234567890'; 
 
-const OUTPUT_DIR = path.join(__dirname, '../audio_assets');
+const OUTPUT_DIR = path.join(__dirname, '../assets/audio/voice');
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR);
 }

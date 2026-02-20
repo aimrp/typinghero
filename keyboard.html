@@ -2190,14 +2190,14 @@
     // --- 3. 音频引擎 (Simple Audio - audio_test.html 风格) ---
     // 音频文件路径常量
     const SOUND_PATHS = {
-        click: 'tipssound/clickonce.mp3',
-        error: 'tipssound/wrong.mp3',
-        explosion: 'tipssound/fireworks.mp3',
-        bell: 'tipssound/hurryup.mp3',
-        bgm: 'audio_bgm/bgm.mp3',
-        v3: 'audio_bgm/v3.m4a',
-        waltz: 'audio_bgm/waltz.mp3',
-        gameover: 'audio_bgm/gameover.mp3'
+        click: 'assets/audio/sfx/clickonce.mp3',
+        error: 'assets/audio/sfx/wrong.mp3',
+        explosion: 'assets/audio/sfx/fireworks.mp3',
+        bell: 'assets/audio/sfx/hurryup.mp3',
+        bgm: 'assets/audio/bgm/bgm.mp3',
+        v3: 'assets/audio/bgm/v3.m4a',
+        waltz: 'assets/audio/bgm/waltz.mp3',
+        gameover: 'assets/audio/bgm/gameover.mp3'
     };
 
     const AudioEngine = {
@@ -2227,7 +2227,7 @@
           if (!filename) return;
           
           // 1. 使用相对路径
-          const src = `audio_assets/${filename}.mp3`;
+          const src = `assets/audio/voice/${filename}.mp3`;
           console.log(`[AudioEngine] Playing voice: ${src}`);
           
           try {

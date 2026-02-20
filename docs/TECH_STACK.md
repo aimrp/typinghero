@@ -55,18 +55,18 @@
 
 ### 2.4 资源文件
 
-- 音效：
-  - `tipssound/clickonce.mp3`
-  - `tipssound/wrong.mp3`
-  - `tipssound/fireworks.mp3`
-  - `tipssound/hurryup.mp3`
-- 背景音乐：
-  - `audio_bgm/bgm.mp3`
-  - `audio_bgm/v3.m4a`
-  - `audio_bgm/waltz.mp3`
-  - `audio_bgm/gameover.mp3`
-- 语音文案：
-  - `audio_assets/` 下的各种 mp3 文件，对应不同嘲讽/夸奖/提示语音。
+- 音效 (SFX)：
+  - `assets/audio/sfx/clickonce.mp3`
+  - `assets/audio/sfx/wrong.mp3`
+  - `assets/audio/sfx/fireworks.mp3`
+  - `assets/audio/sfx/hurryup.mp3`
+- 背景音乐 (BGM)：
+  - `assets/audio/bgm/bgm.mp3`
+  - `assets/audio/bgm/v3.m4a`
+  - `assets/audio/bgm/waltz.mp3`
+  - `assets/audio/bgm/gameover.mp3`
+- 语音文案 (Voice)：
+  - `assets/audio/voice/` 下的各种 mp3 文件，对应不同嘲讽/夸奖/提示语音。
 - 图标与 Logo：
   - `assets/img/logo.png` 用于应用图标与安装包等。
 
@@ -134,4 +134,3 @@
 4. **技术方案变更优先更新文档**：
    - 先改 docs/TECH_STACK.md，再改代码；
    - 保证文档是整个项目的“单一事实来源”。
-

@@ -119,9 +119,9 @@
 
 - `main.js`：Electron 主进程入口，负责创建窗口与加载页面。
 - `keyboard.html`：游戏主界面，包含 UI、逻辑、样式与特效。
-- `audio_assets/`：语音素材（mp3）。
-- `audio_bgm/`：背景音乐（mp3/m4a）。
-- `tipssound/`：按键音与错误提示音效。
+- `assets/audio/voice/`：语音素材（mp3）。
+- `assets/audio/bgm/`：背景音乐（mp3/m4a）。
+- `assets/audio/sfx/`：按键音与错误提示音效。
 - `dist/`：打包输出目录。
 
 ## 5. 详细逻辑规范（给实现方/AI 看的补充说明）
@@ -171,4 +171,3 @@
 - FRONTEND_GUIDELINES.md：前端设计与 UI 规范。
 - BACKEND_STRUCTURE.md：当前（无后端）状态与未来扩展规划。
 - IMPLEMENTATION_PLAN.md：实施步骤与里程碑。
-

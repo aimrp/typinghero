@@ -20,7 +20,7 @@ VOICE_ID = "female-yujie" # 假设使用御姐音，具体 ID 需参考 Minimax 
 SPEED = 1.0
 
 # 输出目录
-OUTPUT_DIR = "audio_assets"
+OUTPUT_DIR = "assets/audio/voice"
 
 # 文案数据 (与 keyboard.html 中的 V2 版本保持一致)
 audio_data = {

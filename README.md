@@ -4,7 +4,7 @@
 
 让枯燥的指法练习变成一场激动人心的冒险。在这里，每一次敲击都是战斗，每一句诗词都是关卡。告别沉闷，用速度征服键盘！
 
-![打字英雄效果预览](demo/demo1.png)
+![打字英雄效果预览](docs/images/demo1.png)
 
 ## 🔥 为什么选择打字英雄？
 
@@ -71,8 +71,9 @@
 ## 📂 项目结构概览
 
 *   `keyboard.html`: 游戏核心逻辑与界面。
-*   `audio_assets/`: 语音包素材。
-*   `audio_bgm/`: 背景音乐素材。
+*   `assets/audio/voice/`: 语音包素材。
+*   `assets/audio/bgm/`: 背景音乐素材。
+*   `assets/audio/sfx/`: 键盘敲击、错误提示等音效。
 *   `main.js`: 窗口启动脚本。
 *   `docs/`: 文档优先 (doc-first / vibe coding) 相关规范文档。
 
